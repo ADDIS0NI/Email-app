@@ -43,8 +43,6 @@ To set up the Email Application locally, follow these steps:
 ## Contributing
 Contributions are welcome! If you have suggestions for improvements or new features, please fork the repository and submit a pull request.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 - Inspired by various email applications and frameworks.
