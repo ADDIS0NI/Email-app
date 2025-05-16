@@ -9,7 +9,21 @@ The Email Application is a web-based platform built with Django that allows user
 - **User Authentication**: Secure user authentication to protect user data and privacy.
 - **Reply**: User's can reply to mails and also send the same mail to another user without copying the content.
 - **Responsive Design**: The application is designed to be responsive, providing a great user experience on both desktop and mobile devices.
+- **API**: The application accesses the restful APIs and fetches the data. **for example : **
+   ```bash
+   GET /emails/<str:mailbox>
+   ```
+   ```bash
+   GET /emails/<int:email_id>
+   ```
+   ```bash
+   POST /emails
+   ```
+   ```bash
+   PUT /emails/<int:email_id>
 
+   ```
+  
 ## Installation
 To set up the Email Application locally, follow these steps:
 
