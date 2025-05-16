@@ -1,12 +1,671 @@
-textarea {
-    min-height: 400px;
+/* Theme Colors - Dark Mode */
+:root {
+    --primary-color: #6d4aff;
+    --primary-hover: #5b3df5;
+    --bg-dark: #1c1c1c;
+    --bg-darker: #141414;
+    --bg-light: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1a1;
+    --border-color: #363636;
+    --read-color: rgba(109, 74, 255, 0.1);
+    --card-bg: #252525;
+    --nav-bg: #1a1b1e;
 }
 
-.read{
-    background-color: rgb(177, 173, 173);
+/* Global Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
 
-.unread{
+/* Main Layout */
+.main-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    width: 250px;
+    background-color: var(--bg-darker);
+    padding: 20px;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar-brand {
+    color: var(--primary-color);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-btn {
+    background-color: transparent;
+    border: none;
+    color: var(--text-primary);
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-btn:hover {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+}
+
+.nav-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Main Content Area - Only for authenticated pages */
+.authenticated .main-content {
+    margin-left: 250px;
+    padding: 30px;
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    background-color: var(--bg-dark);
+}
+
+/* Authentication Pages */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-dark);
+    padding: 20px;
+    width: 100vw;
+}
+
+.login-container, .register-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 35px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    
+    
+}
+
+/* Email List */
+#emails-view {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.email {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-light);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.email:last-child {
+    border-bottom: none;
+}
+
+.email:hover {
+    background-color: var(--bg-darker);
+}
+
+.email-sender {
+    width: 200px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.email-subject {
+    flex: 1;
+    color: var(--text-secondary);
+}
+
+.email-timestamp {
+    width: 100px;
+    text-align: right;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+.read {
+    background-color: var(--bg-darker);
+    opacity: 0.8;
+}
+
+.unread {
+    background-color: var(--bg-light);
+    position: relative;
+}
+
+.unread::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--primary-color);
+}
+
+/* Compose Form */
+#compose-view {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+#compose-view h3 {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.form-control {
+    background-color: var(--bg-darker);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(109, 74, 255, 0.2);
+    outline: none;
+}
+
+textarea.form-control {
+    min-height: 200px;
+    resize: vertical;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 15px;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-btn {
+        width: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .email {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .email-sender,
+    .email-subject,
+    .email-timestamp {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: var(--nav-bg);
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.navbar-nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.nav-btn {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.nav-btn.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+/* Auth Form Controls */
+.login-container .form-control,
+.register-container .form-control {
+    background-color: var(--bg-darker);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.login-container .form-control:focus,
+.register-container .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(109, 74, 255, 0.2);
+    outline: none;
+}
+
+.login-container .btn-primary,
+.register-container .btn-primary {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.login-container .text-center,
+.register-container .text-center {
+    margin-top: 20px;
+    color: var(--text-secondary);
+}
+
+.login-container a,
+.register-container a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.login-container a:hover,
+.register-container a:hover {
+    color: var(--primary-hover);
+    text-decoration: none;
+}
+
+/* Auth Form Responsive */
+@media (max-width: 768px) {
+    .login-container,
+    .register-container {
+        margin: 40px 20px;
+        padding: 25px;
+    }
+}
+
+/* Alert Messages */
+.alert {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Section Headers */
+.section-header {
+    font-size: 24px;
+    color: #2c3e50;
+    margin: 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #4a90e2;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Navigation Buttons */
+.btn-outline-primary {
+    margin-right: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2);
+}
+
+/* Add a loading animation for when emails are being fetched */
+@keyframes shimmer {
+    0% {
+        background-position: -468px 0;
+    }
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+.loading {
+    animation: shimmer 1s linear infinite;
+    background: linear-gradient(to right, #f6f7f8 8%, #edeef1 18%, #f6f7f8 33%);
+    background-size: 800px 104px;
+    position: relative;
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 8px;
+}
+
+.pagination-item {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #e1e4e8;
     background-color: white;
+    color: #4a90e2;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
+
+.pagination-item:hover {
+    background-color: #4a90e2;
+    color: white;
+    border-color: #4a90e2;
+}
+
+.pagination-item.active {
+    background-color: #4a90e2;
+    color: white;
+    border-color: #4a90e2;
+}
+
+/* Email Detail View Enhancements */
+.email-detail {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    margin-bottom: 20px;
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+.email-detail-header {
+    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.email-detail-subject {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.email-detail-metadata {
+    display: flex;
+    justify-content: space-between;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.email-detail-body {
+    line-height: 1.8;
+    color: #2c3e50;
+    font-size: 1rem;
+    padding: 20px 0;
+}
+
+/* Bootstrap Button Overrides with animations */
+.btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Email View Styles */
+.email-header {
+    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.email-metadata {
+    color: #6c757d;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.email-subject {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #1a2027;
+}
+
+.email-body {
+    line-height: 1.6;
+    color: #2c3e50;
+    font-size: 15px;
+}
+
+/* Archive and Reply buttons */
+.email-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    position: static;
+}
+
+.archive-button, .reply-button {
+    background-color: #fff;
+    border: 1px solid #4a90e2;
+    color: #4a90e2;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin-right: 10px;
+    display: inline-block;
+    position: static;
+}
+
+.archive-button:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+.reply-button:hover {
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+    color: white;
+}
+
+/* Navigation Buttons */
+.nav-buttons button {
+    background-color: #fff;
+    color: #4a90e2;
+    border: 1px solid #4a90e2;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-buttons button:hover {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.nav-buttons button.active {
+    background-color: #4a90e2;
+    color: white;
+}
+
+/* Log Out button specific style */
+.nav-buttons button[onclick*="logout"] {
+    margin-left: auto;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.nav-buttons button[onclick*="logout"]:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Email header style */
+.email-header-text {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Bootstrap Button Overrides */
+.btn-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
+}
+
+/* Archive and Reply buttons in email view */
+#email-detail-view .btn {
+    margin-right: 8px;
+    margin-top: 15px;
+}
+
+#email-detail-view .btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+#email-detail-view .btn-outline-danger:hover {
+    color: white;
+    background-color: #dc3545;
+}
+
+/* Email header */
+h2 {
+    color: hsl(210, 60%, 55%);
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-left: 80px;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #e1e4e8;
+}
+
 
